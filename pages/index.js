@@ -83,7 +83,7 @@ export default function HomePage({ initialModels = [], initialOffset }) {
             <button 
               className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700" 
               onClick={handleLoadMore}
-            >
+            > 
               Load More
             </button>
           </div>
