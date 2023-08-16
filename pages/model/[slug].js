@@ -16,6 +16,17 @@ export default function ModelPage({ model }) {
     return <div>Model not found</div>;
   }
 
+  const siteFields = [
+    'livejasmin_id', 'streamate_id', 'camsoda_id',
+    'chaturbate_id', 'myfreecams_id', 'xcams_id',
+    'camsdotcom_id', 'bongacams_id', 'stripchat_id',
+    'flirt4free_id'
+  ];
+
+  const otherSites = siteFields.filter(siteField => {
+    return model.fields[siteField];
+  });
+
   return (
     <Layout>
       <div className="bg-gray-100 min-h-screen">
@@ -26,16 +37,20 @@ export default function ModelPage({ model }) {
         </div>
         <div className="p-4 md:p-8 lg:p-12 space-y-4 md:space-y-8 lg:space-y-12 bg-white rounded-lg shadow-md mt-4 mx-4 md:mx-8 lg:mx-12">
           <h1 className="text-2xl font-semibold">{model.fields.name}</h1>
-          {/* ... rest of the details for the model, like Age, Country, Price, etc. */}
+          
+          {/* Other Sites Section */}
           <div className="flex space-x-2">
-            <a href={model.fields.skyprivate_link} className="text-blue-500 underline">
-              Skyprivate Link
-            </a>
-            <a href={model.fields.livejasmin_link} className="text-blue-500 underline">
-              LiveJasmin Link
-            </a>
-            {/* ... other links */}
+            {otherSites.map((siteField, index) => (
+              <a 
+                key={index}
+                href={model.fields[`${siteField.replace('_id', '')}_link`]} 
+                className="text-blue-500 underline"
+              >
+                {siteField.replace('_id', '')}
+              </a>
+            ))}
           </div>
+          
           <p className="text-gray-600">{model.fields.bio}</p>
           <p className="text-gray-600">{model.fields.tags}</p>
         </div>

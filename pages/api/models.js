@@ -37,6 +37,8 @@ export default async (req, res) => {
       params: {
         offset: offset,
         filterByFormula: filterString,
+        view: `viwFlMnrZzZVweyqe`,
+        pageSize: 50,
       },
     });
 

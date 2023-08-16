@@ -87,7 +87,7 @@ async function fetchModelSlugs() {
 export default async (req, res) => {
   try {
     const urls = [];
-    const protocolAndHost = req.headers.host.includes('localhost') ? 'http://localhost:3000' : 'https://your-production-domain.com';
+    const protocolAndHost = req.headers.host.includes('localhost') ? 'http://localhost:3000' : 'https://secretskype.com';
 
     for (const siteID of siteIDs) {
       const idsForSite = await fetchRecordsForSite(siteID);
