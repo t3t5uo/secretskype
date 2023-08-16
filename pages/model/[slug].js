@@ -1,17 +1,20 @@
-import { useState } from 'react';
-import { fetchModelById } from '../../utils/airtable';
 import Layout from '../../components/Layout';
+import { useState } from 'react';
 
 export default function ModelPage({ model }) {
   const [lightboxImage, setLightboxImage] = useState(null);
 
-  const openLightbox = (imageUrl) => {
-    setLightboxImage(imageUrl);
+  const openLightbox = (url) => {
+    setLightboxImage(url);
   };
 
   const closeLightbox = () => {
     setLightboxImage(null);
   };
+
+  if (!model) {
+    return <div>Model not found</div>;
+  }
 
   return (
     <Layout>
@@ -52,15 +55,18 @@ export default function ModelPage({ model }) {
   );
 }
 
-export async function getServerSideProps(context) {
-  console.log("Fetching model with ID:", context.params.id); // Debugging log
-  const model = await fetchModelById(context.params.id);
+export async function getServerSideProps({ params }) {
+  const { slug } = params;
 
-  if (!model) {
-    return {
-      notFound: true,
-    };
+  const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000";
+  const response = await fetch(`${baseUrl}/api/models?slug=${slug}`);
+  const data = await response.json();
+  
+  if (data.records.length === 0) {
+    return { notFound: true };
   }
+
+  const model = data.records[0];
 
   return {
     props: {

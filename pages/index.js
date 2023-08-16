@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Layout from '../components/Layout';
 
 export default function HomePage({ initialModels = [], initialOffset }) {
@@ -66,7 +66,7 @@ export default function HomePage({ initialModels = [], initialOffset }) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {models.map(model => (
-            <Link key={model.id} href={`/model/${model.id}`}>
+            <Link key={model.id} href={`/model/${model.fields.slug}`}>
               <div className="cursor-pointer border rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
                 <img src={model.fields.thumb_image[0].url} alt={model.fields.name} className="w-full h-48 object-cover" />
                 <div className="p-4">

@@ -7,30 +7,29 @@ const HEADERS = {
 };
 
 export default async (req, res) => {
-  const { offset, minPrice, maxPrice, keyword } = req.query;
-
+  const { offset, minPrice, maxPrice, keyword, slug } = req.query;
   const filter = [];
 
-if (minPrice) {
-  filter.push(`AND({price} >= ${minPrice}, NOT({price} = BLANK()))`);
-}
+  if (minPrice) {
+    filter.push(`AND({price} >= ${minPrice}, NOT({price} = BLANK()))`);
+  }
 
-if (maxPrice) {
-  filter.push(`AND({price} <= ${maxPrice}, NOT({price} = BLANK()))`);
-}
+  if (maxPrice) {
+    filter.push(`AND({price} <= ${maxPrice}, NOT({price} = BLANK()))`);
+  }
 
-if (keyword) {
-  const keywordFilter = `(
-    SEARCH("${keyword}", LOWER({keyword}))
-  )`;
-  
-  filter.push(`(${keywordFilter})`);
-}
+  if (keyword) {
+    const keywordFilter = `(
+      SEARCH("${keyword}", LOWER({keyword}))
+    )`;
+    filter.push(`(${keywordFilter})`);
+  }
 
-const filterString = `AND(${filter.join(',')})`;
-console.log("Generated filterString:", filterString); // Log the filterString to the console
+  if (slug) {
+    filter.push(`AND({slug} = "${slug}")`);
+  }
 
-  
+  const filterString = `AND(${filter.join(',')})`;
 
   try {
     const response = await axios.get(AIRTABLE_ENDPOINT, {
@@ -47,13 +46,11 @@ console.log("Generated filterString:", filterString); // Log the filterString to
         offset: response.data.offset,
       });
     } else {
-      console.error("Error response from Airtable:", response.status, response.data);
       res.status(response.status).json({
         error: "Error fetching data from Airtable",
       });
     }
   } catch (error) {
-    console.error("Caught error during Axios request:", error); // Log any caught errors
     res.status(500).json({
       error: "Internal server error",
     });
