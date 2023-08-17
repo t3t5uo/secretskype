@@ -38,6 +38,26 @@ export default function ModelPage({ model }) {
         <div className="p-4 md:p-8 lg:p-12 space-y-4 md:space-y-8 lg:space-y-12 bg-white rounded-lg shadow-md mt-4 mx-4 md:mx-8 lg:mx-12">
           <h1 className="text-2xl font-semibold">{model.fields.name}</h1>
           
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <div className="space-y-2 md:space-y-4">
+              <p className="text-gray-600">Age: {model.fields.age}</p>
+              <p className="text-gray-600">Country: {model.fields.country}</p>
+              <p className="text-gray-600">Online Since: {new Date(model.fields.online_date).toLocaleDateString()}</p>
+              <p className="text-gray-600">Sex: {model.fields.sex}</p>
+              {model.fields.twitter && (
+                <p className="text-gray-600">Twitter: <a href={model.fields.twitter} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline"> @{model.fields.twitter}</a></p>
+              )}
+              <p className="text-gray-600">Star Rating: {model.fields.star_rating.toFixed(2)}</p>
+              <p className="text-gray-600">Languages: {model.fields.languages}</p>
+            </div>
+            
+            {model.fields.skyprivate_link && (
+              <a href={model.fields.skyprivate_link} target="_blank" rel="noopener noreferrer" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4 md:mt-0">
+                View SkyPrivate Profile
+              </a>
+            )}
+          </div>
+
           {/* Other Sites Section */}
           <div className="flex space-x-2">
             {otherSites.map((siteField, index) => (
@@ -50,10 +70,11 @@ export default function ModelPage({ model }) {
               </a>
             ))}
           </div>
-          
+
           <p className="text-gray-600">{model.fields.bio}</p>
           <p className="text-gray-600">{model.fields.tags}</p>
         </div>
+        
         {/* Lightbox */}
         {lightboxImage && (
           <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
@@ -76,7 +97,7 @@ export async function getServerSideProps({ params }) {
   const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000";
   const response = await fetch(`${baseUrl}/api/models?slug=${slug}`);
   const data = await response.json();
-  
+
   if (data.records.length === 0) {
     return { notFound: true };
   }

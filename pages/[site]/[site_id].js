@@ -45,23 +45,33 @@ export default function ModelPage({ model, site }) {
         <div className="p-4 md:p-8 lg:p-12 space-y-4 md:space-y-8 lg:space-y-12 bg-white rounded-lg shadow-md mt-4 mx-4 md:mx-8 lg:mx-12">
           <h1 className="text-2xl font-semibold">{model.fields.name}</h1>
           
+          <p className="text-gray-600">Age: {model.fields.age}</p>
+          <p className="text-gray-600">Country: {model.fields.country}</p>
+          <p className="text-gray-600">Online Since: {new Date(model.fields.online_date).toLocaleDateString()}</p>
+          <p className="text-gray-600">Sex: {model.fields.sex}</p>
+          {model.fields.twitter && (
+            <p className="text-gray-600">Twitter: <a href={model.fields.twitter} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline"> @{model.fields.twitter}</a></p>
+          )}
+          <p className="text-gray-600">Star Rating: {model.fields.star_rating.toFixed(2)}</p>
+          <p className="text-gray-600">Languages: {model.fields.languages}</p>
+          
           <p className="text-gray-600">{model.fields.bio}</p>
           <p className="text-gray-600">{model.fields.tags}</p>
           
           {/* Other Sites Section */}
           {otherSites.length > 0 && (
-          <div className="flex space-x-2">
-            {otherSites.map((siteField, index) => (
-              <a 
-                key={index} 
-                href={model.fields[`${siteField.replace('_id', '')}_link`]} 
-                className="text-blue-500 underline"
-              >
-                {siteField.replace('_id', '')}
-              </a>
-            ))}
-          </div>
-        )}  
+            <div className="flex space-x-2">
+              {otherSites.map((siteField, index) => (
+                <a 
+                  key={index} 
+                  href={model.fields[`${siteField.replace('_id', '')}_link`]} 
+                  className="text-blue-500 underline"
+                >
+                  {siteField.replace('_id', '')}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
         {/* Lightbox */}
         {lightboxImage && (
