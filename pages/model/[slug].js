@@ -52,7 +52,7 @@ export default function ModelPage({ model }) {
             </div>
             
             {model.fields.skyprivate_link && (
-              <a href={model.fields.skyprivate_link} target="_blank" rel="noopener noreferrer" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4 md:mt-0">
+              <a href={model.fields.skyprivate_url} target="_blank" rel="noopener noreferrer" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4 md:mt-0">
                 View SkyPrivate Profile
               </a>
             )}

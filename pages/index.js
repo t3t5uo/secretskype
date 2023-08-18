@@ -242,8 +242,12 @@ export default function HomePage({ initialModels = [], initialOffset }) {
             </button>
           </div>
         )}
+
+        <Footer/>
         
       </div>
+
+
       
   );
 }
