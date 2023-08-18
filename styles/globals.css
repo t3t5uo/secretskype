@@ -3,6 +3,7 @@
 @import 'tailwindcss/utilities';
 
 
+
 html,
 body {
   padding: 0;
@@ -19,3 +20,68 @@ a {
 * {
   box-sizing: border-box;
 }
+
+
+
+.models-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 0.5rem;
+  margin: 1rem;
+}
+
+.image-wrapper {
+  position: relative;
+}
+
+.model-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.25rem;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.model-name {
+  font-size: 0.8rem;
+}
+
+.model-price {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.4rem;
+  background-color: rgba(0, 128, 255, 0.8);
+  border-radius: 0.25rem;
+}
+
+/* For mobile screens */
+@media (max-width: 640px) {
+  .models-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* For larger screens */
+@media (min-width: 1024px) {
+  .model-image {
+    height: 250px;
+  }
+}
+
+/* For extra large screens */
+@media (min-width: 1440px) {
+  .model-image {
+    height: 300px;
+  }
+}
+
+

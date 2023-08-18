@@ -40,8 +40,11 @@
     } else if (gender === 'Trans') {
       filter.push(`{sex} = 'Transgender/TS'`);
     } else if (gender === 'FemaleTrans') {
-      filter.push(`OR({sex} = 'Female', {sex} = 'Transgender/TS')`);
-    }
+      filter.push(`OR({sex} = 'Female', {sex} = 'Transgender/TS')`);      
+    } 
+    // else {
+    //   filter.push("OR({sex} = 'Female', {sex} = 'Transgender/TS')");
+    // }
 
     if (location) {
       filter.push(`AND({secretskype_location} = "${location}")`);

@@ -1,7 +1,3 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-
 // // pages/menu.js
 // import React, { useState } from 'react';
 
@@ -91,8 +87,10 @@ import { useRouter } from 'next/router';
 // }
 
 
+// pages/menu.js
+import React, { useState } from 'react';
 
-export default function Header() {
+export default function MenuPage() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -110,11 +108,9 @@ export default function Header() {
       <div className="bg-white text-blue-600 p-4 flex justify-between items-center border-b border-gray-200">
         <span className="w-1/4"></span>
 
-        <Link href="/">
-          <div className="text-lg font-semibold w-1/2 text-center no-underline">
-            SecretSkype
-          </div>
-        </Link>
+        <span className="text-lg font-semibold w-1/2 text-center">
+          SecretSkype
+        </span>
 
         <button
           onClick={toggleMenu}

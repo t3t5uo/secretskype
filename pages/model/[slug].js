@@ -47,7 +47,7 @@ export default function ModelPage({ model }) {
               {model.fields.twitter && (
                 <p className="text-gray-600">Twitter: <a href={model.fields.twitter} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline"> @{model.fields.twitter}</a></p>
               )}
-              <p className="text-gray-600">Star Rating: {model.fields.star_rating.toFixed(2)}</p>
+              <p className="text-gray-600">Star Rating: {model.fields.star_rating}</p>
               <p className="text-gray-600">Languages: {model.fields.languages}</p>
             </div>
             
