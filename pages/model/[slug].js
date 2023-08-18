@@ -16,76 +16,64 @@ export default function ModelPage({ model }) {
     return <div>Model not found</div>;
   }
 
-  const siteFields = [
-    'livejasmin_id', 'streamate_id', 'camsoda_id',
-    'chaturbate_id', 'myfreecams_id', 'xcams_id',
-    'camsdotcom_id', 'bongacams_id', 'stripchat_id',
-    'flirt4free_id'
+  const tagsArray = model.fields.tags ? model.fields.tags.split(', ') : [];
+  const skypeButtonText = model.fields.price ? `$${model.fields.price}/min | Skype Profile` : 'Skype Profile';
+
+  const otherSites = [
+    { idField: 'livejasmin_id', name: 'LiveJasmin', color: 'bg-red-500' },
+    { idField: 'streamate_id', name: 'Streamate', color: 'bg-blue-500' },
+    { idField: 'camsoda_id', name: 'CamSoda', color: 'bg-pink-500' },
+    { idField: 'chaturbate_id', name: 'Chaturbate', color: 'bg-white text-black' },
+    { idField: 'myfreecams_id', name: 'MyFreeCams', color: 'bg-green-500' },
+    { idField: 'xcams_id', name: 'XCams', color: 'bg-blue-500' },
+    { idField: 'camsdotcom_id', name: 'Cams.com', color: 'bg-pink-500' },
+    { idField: 'bongacams_id', name: 'BongaCams', color: 'bg-red-500' },
+    { idField: 'stripchat_id', name: 'Stripchat', color: 'bg-pink-500' },
+    { idField: 'flirt4free_id', name: 'Flirt4Free', color: 'bg-blue-500' },
   ];
 
-  const otherSites = siteFields.filter(siteField => {
-    return model.fields[siteField];
-  });
+  const visibleSites = otherSites.filter(site => model.fields[site.idField]);
 
   return (
     <Layout>
-      <div className="bg-gray-100 min-h-screen">
-        <div className="bg-cover bg-center h-64" style={{ backgroundImage: `url(${model.fields.background_image[0].url})` }}>
-          <div className="bg-black bg-opacity-50 h-full flex items-center justify-center">
-            <img src={model.fields.profile_image[0].url} alt={model.fields.name} className="w-32 h-32 rounded-full border-4 border-white shadow-lg cursor-pointer" onClick={() => openLightbox(model.fields.profile_image[0].url)} />
-          </div>
-        </div>
-        <div className="p-4 md:p-8 lg:p-12 space-y-4 md:space-y-8 lg:space-y-12 bg-white rounded-lg shadow-md mt-4 mx-4 md:mx-8 lg:mx-12">
-          <h1 className="text-2xl font-semibold">{model.fields.name}</h1>
-          
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="space-y-2 md:space-y-4">
-              <p className="text-gray-600">Age: {model.fields.age}</p>
-              <p className="text-gray-600">Country: {model.fields.country}</p>
-              <p className="text-gray-600">Online Since: {new Date(model.fields.online_date).toLocaleDateString()}</p>
-              <p className="text-gray-600">Sex: {model.fields.sex}</p>
-              {model.fields.twitter && (
-                <p className="text-gray-600">Twitter: <a href={model.fields.twitter} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline"> @{model.fields.twitter}</a></p>
-              )}
-              <p className="text-gray-600">Star Rating: {model.fields.star_rating}</p>
-              <p className="text-gray-600">Languages: {model.fields.languages}</p>
-            </div>
-            
-            {model.fields.skyprivate_link && (
-              <a href={model.fields.skyprivate_url} target="_blank" rel="noopener noreferrer" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4 md:mt-0">
-                View SkyPrivate Profile
-              </a>
+      <div className="bg-white min-h-screen">
+        {/* Hero Section */}
+        <div className="relative h-[90vh] bg-cover bg-center" style={{ backgroundImage: `url(${model.fields.background_image[0].url})` }}>
+          <div className="absolute inset-0 bg-black opacity-40"></div>
+
+          {/* Profile Picture and Information */}
+          <div className="absolute inset-0 bottom-0 left-0 right-0 text-center p-10 flex flex-col justify-center items-center">
+            <img src={model.fields.profile_image[0].url} alt={`${model.fields.name}'s Profile`} onClick={() => openLightbox(model.fields.profile_image[0].url)} className="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full mx-auto mb-8 cursor-pointer" />
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2">{model.fields.name}</h1>
+            <p className="text-xl md:text-lg text-white mb-5">{model.fields.country_emoji} {model.fields.country} | {model.fields.age}</p>
+
+            {/* Skype Button */}
+            <a href={model.fields.skyprivate_url} className="mb-6 inline-block mx-2 px-8 py-3 text-lg text-white bg-blue-600 rounded-full">{skypeButtonText}</a>
+
+            {/* Other Cams Section */}
+            {visibleSites.length > 0 && (
+              <div className="mb-6">
+                <h3 className="text-lg md:text-xl text-white mb-4">Live Cams</h3>
+                {visibleSites.map((site, index) => (
+                  <a key={index} href={model.fields[site.idField.replace('_id', '_link')]} className={`${site.color} inline-block mx-2 px-5 py-2 text-white rounded-full`}>{site.name}</a>
+                ))}
+              </div>
             )}
           </div>
+        </div>
 
-          {/* Other Sites Section */}
-          <div className="flex space-x-2">
-            {otherSites.map((siteField, index) => (
-              <a 
-                key={index}
-                href={model.fields[`${siteField.replace('_id', '')}_link`]} 
-                className="text-blue-500 underline"
-              >
-                {siteField.replace('_id', '')}
-              </a>
+        {/* White Background Section */}
+        <div className="bg-white mt-5 p-10 max-w-3xl mx-auto rounded-lg">
+          {/* Tags */}
+          <div className="flex flex-wrap justify-center mt-3">
+            {tagsArray.map((tag, index) => (
+              <span key={index} className="m-1 px-3 py-1 text-sm bg-gray-200 rounded-full">{tag}</span>
             ))}
           </div>
 
-          <p className="text-gray-600">{model.fields.bio}</p>
-          <p className="text-gray-600">{model.fields.tags}</p>
+          {/* Bio */}
+          <p className="text-gray-600 mt-10">{model.fields.bio}</p>
         </div>
-        
-        {/* Lightbox */}
-        {lightboxImage && (
-          <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-            <div className="max-w-screen-lg mx-auto">
-              <img src={lightboxImage} alt={model.fields.name} className="max-h-screen" />
-              <button onClick={closeLightbox} className="absolute top-2 right-2 text-white">
-                Close
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     </Layout>
   );

@@ -1,173 +1,58 @@
-// // pages/menu.js
-// import React, { useState } from 'react';
-
-// export default function MenuPage() {
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   const toggleMenu = () => {
-//     setIsOpen(!isOpen);
-//   };
-
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     // Add your form handling logic here, like sending the data to an API
-//     console.log("Form submitted");
-//   };
-
-//   return (
-//     <div className="">
-//       <div className="bg-white text-blue-600 p-4 flex justify-between items-center border-b border-gray-200">
-//         <span className="w-1/4"></span>
-
-//         <span className="text-lg font-semibold w-1/2 text-center">
-//           SecretSkype
-//         </span>
-
-//         <button
-//           onClick={toggleMenu}
-//           className="w-1/4 flex justify-end items-center px-3 py-2 text-gray-600"
-//         >
-//           <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-//             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-//           </svg>
-//         </button>
-//       </div>
-
-//       <div
-//         className={`fixed top-0 right-0 w-64 h-full bg-white shadow-lg transform ${
-//           isOpen ? 'translate-x-0' : 'translate-x-full'
-//         } transition-transform duration-300 ease-in-out z-50`}
-//       >
-//         <button
-//           onClick={toggleMenu}
-//           className="absolute top-4 right-4 text-gray-500 hover:text-black"
-//         >
-//           <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-//             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-//           </svg>
-//         </button>
-
-//         <div className="mt-16 px-6">
-//           <form onSubmit={handleSubmit} className="space-y-4">
-//             <input type="text" placeholder="Keyword" className="p-2 border rounded w-full" />
-
-//             <div className="flex justify-between">
-//               <input type="number" placeholder="Min Age" className="p-2 border rounded w-1/2 mr-2" />
-//               <input type="number" placeholder="Max Age" className="p-2 border rounded w-1/2 ml-2" />
-//             </div>
-            
-//             <div className="flex justify-between">
-//               <input type="number" placeholder="Min Price" className="p-2 border rounded w-1/2 mr-2" />
-//               <input type="number" placeholder="Max Price" className="p-2 border rounded w-1/2 ml-2" />
-//             </div>
-
-//             <select className="p-2 border rounded w-full">
-//               <option value="" disabled selected>Gender</option>
-//               <option value="male">Male</option>
-//               <option value="female">Female</option>
-//               <option value="other">Other</option>
-//             </select>
-
-//             <select className="p-2 border rounded w-full">
-//               <option value="" disabled selected>Location</option>
-//               <option value="us">United States</option>
-//               <option value="uk">United Kingdom</option>
-//               <option value="ca">Canada</option>
-//               {/* Add more locations as needed */}
-//             </select>
-
-//             <button type="submit" className="p-2 w-full bg-blue-500 text-white rounded">
-//               Submit
-//             </button>
-//           </form>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-// pages/menu.js
 import React, { useState } from 'react';
 
-export default function MenuPage() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Add your form handling logic here, like sending the data to an API
-    console.log("Form submitted");
-  };
+export default function Model() {
+  const [model, setModel] = useState({
+    backgroundImage: 'https://v5.airtableusercontent.com/v1/19/19/1692396000000/HqevsW4WnN6-EWUqG4Zi9Q/WdKGg_FfmaupujAvi2otEAqF6m1Rjy_Bv6x8Coo6l5NNVYp_vq9iT-TGXtMtlE-qqzKDdkFHmHGLQ9mDiw5r1UleY_YycMasY7KidjqMZx2N2qU32q5XtcbPnuHBVL6l/X9_fZDd7x6dqFLE6m9LeSAg5gkIIg583PgIr_pLfQW0',
+    profileImage: 'https://v5.airtableusercontent.com/v1/19/19/1692396000000/G1VgNXAyblzf6wWtsAGRVw/8Tc71ISz8ipxgRWgILpAFropNMZPMlXyvJFFxNZIhepdflV-AhZ-x4wMaaMQSwZeAVlU_P9VXC9ZJAYwpFEEOiRVpkcq7MPtRsZ0B6Z6L5lvR0SjtXWm8XxvVmTi0Qq_/Sc64sqHHhimLNc0a0Atd8nBtsIeGdRlgMOGMqBGb-GQ',
+    name: 'MissJaneDoe',
+    age: 25,
+    price: '$2.00/min',
+    country: 'Romania',
+    country_emoji: '🇷🇴',
+    skypeLink: 'skype:jane_doe',
+    ljLink: 'http://example.com/lj',
+    csLink: 'http://example.com/cs',
+    tags: ['CEI', 'JOI', 'Humilliation'],
+    bio: 'This is a short bio about the model...',
+  });
 
   return (
-    <div className="">
-      <div className="bg-white text-blue-600 p-4 flex justify-between items-center border-b border-gray-200">
-        <span className="w-1/4"></span>
+    <div className="m-0 p-0">
+      {/* Hero Section */}
+      <div className="relative h-screen bg-cover bg-center" style={{ backgroundImage: `url(${model.backgroundImage})` }}>
+        
+        {/* Profile Picture and Information */}
+        <div className="absolute inset-0 bottom-0 left-0 right-0 text-center p-10 flex flex-col justify-center items-center">
+          <img src={model.profileImage} alt={`${model.name}'s Profile`} className="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full mx-auto mb-8" />
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2">{model.name}</h1>
+          <p className="text-xl md:text-lg text-white mb-5">{model.country_emoji} {model.country} | {model.age}</p>
 
-        <span className="text-lg font-semibold w-1/2 text-center">
-          SecretSkype
-        </span>
+          {/* Skype Button */}
+          <a href={model.skypeLink} className="mb-6 inline-block mx-2 px-8 py-3 text-lg text-white bg-blue-600 rounded-full">{model.price} | Skype Profile</a>
 
-        <button
-          onClick={toggleMenu}
-          className="w-1/4 flex justify-end items-center px-3 py-2 text-gray-600"
-        >
-          <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
+          {/* Other Cams Section */}
+          <div className="mb-6">
+            <h3 className="text-lg md:text-xl text-white mb-4">Live Cams</h3>
+            <a href={model.ljLink} className="inline-block mx-2 px-5 py-2 text-white bg-red-500 rounded-full">LiveJasmin</a>
+            <a href={model.csLink} className="inline-block mx-2 px-5 py-2 text-white bg-pink-500 rounded-full">CamSoda</a>
+          </div>
+        </div>
       </div>
 
-      <div
-        className={`fixed top-0 right-0 w-64 h-full bg-white shadow-lg transform ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        } transition-transform duration-300 ease-in-out z-50`}
-      >
-        <button
-          onClick={toggleMenu}
-          className="absolute top-4 right-4 text-gray-500 hover:text-black"
-        >
-          <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-
-        <div className="mt-16 px-6">
-          {/* <form onSubmit={handleSubmit} className="space-y-4">
-            <input type="text" placeholder="Keyword" className="p-2 border rounded w-full" />
-
-            <div className="flex justify-between">
-              <input type="number" placeholder="Min Age" className="p-2 border rounded w-1/2 mr-2" />
-              <input type="number" placeholder="Max Age" className="p-2 border rounded w-1/2 ml-2" />
-            </div>
-            
-            <div className="flex justify-between">
-              <input type="number" placeholder="Min Price" className="p-2 border rounded w-1/2 mr-2" />
-              <input type="number" placeholder="Max Price" className="p-2 border rounded w-1/2 ml-2" />
-            </div>
-
-            <select className="p-2 border rounded w-full">
-              <option value="" disabled selected>Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-
-            <select className="p-2 border rounded w-full">
-              <option value="" disabled selected>Location</option>
-              <option value="us">United States</option>
-              <option value="uk">United Kingdom</option>
-              <option value="ca">Canada</option>
-            </select>
-
-            <button type="submit" className="p-2 w-full bg-blue-500 text-white rounded">
-              Submit
-            </button>
-          </form> */}
+      {/* White Background Section */}
+      <div className="bg-white mt-10 p-10 max-w-3xl mx-auto rounded-lg">
+        {/* Country, Emoji, Age, Tags and Bio */}
+        <div className="mb-5">
+          {/* Tags */}
+          <div className="flex flex-wrap justify-center mb-5">
+            {model.tags.map((tag, index) => (
+              <span key={index} className="m-2 px-4 py-1 bg-gray-200 rounded-full">{tag}</span>
+            ))}
+          </div>
+          
+          {/* Bio */}
+          <h2 className="text-2xl font-semibold mb-4">Bio</h2>
+          <p>{model.bio}</p>
         </div>
       </div>
     </div>
