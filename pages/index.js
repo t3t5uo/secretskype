@@ -75,6 +75,10 @@ export default function HomePage({ initialModels = [], initialOffset }) {
 
       <Head>
         <title>SecretSkype</title>
+        <meta 
+          name="description" 
+          content="Cam girls you can all on Skype at the best prices."
+        />
         {/* <meta 
           name="description" 
           content="Cam girls you can all on Skype at the best prices."
