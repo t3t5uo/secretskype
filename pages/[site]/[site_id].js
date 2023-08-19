@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import Layout from '../../components/Layout';
 import axios from 'axios';
-import Head from 'next/head'; 
-import { useRouter } from 'next/router';
+// import Head from 'next/head'; 
+// import { useRouter } from 'next/router';
 
 
 export default function ModelPage({ model, site }) {
@@ -44,7 +44,7 @@ export default function ModelPage({ model, site }) {
 
   return (
     <Layout>
-      <Head>
+      {/* <Head>
         <title>SecretSkype - {model.fields.name} - {currentSiteName}</title>
         <meta 
           name="{model.fields.name} on {currentSiteName} has a SecretSkype account with cheaper rates.{descriptionPrice}" 
@@ -53,7 +53,7 @@ export default function ModelPage({ model, site }) {
         <link rel="canonical" href={`https://yourdomain.com/${site}/${model.fields[site + '_id']}`} />
         <meta charSet="UTF-8" />
         <html lang="en" />
-      </Head>
+      </Head> */}
       <div className="bg-white min-h-screen">
         {/* Hero Section */}
         <div className="relative h-[90vh] bg-cover bg-center" style={{ backgroundImage: `url(${model.fields.background_image[0].url})` }}>
