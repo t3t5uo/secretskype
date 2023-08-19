@@ -1,9 +1,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import Footer from '../components/Footer';
-// import { useRouter } from 'next/router';
 import Head from 'next/head';
-
 
 export default function HomePage({ initialModels = [], initialOffset }) {
   const [models, setModels] = useState(initialModels);
@@ -239,22 +237,19 @@ export default function HomePage({ initialModels = [], initialOffset }) {
         )}
       </div>
 
-        {offset && (
-          <div className="flex justify-center mt-4">
-            <button 
-              className="px-4 py-2 bg-blue-400 text-white rounded-full hover:bg-blue-500"
-              onClick={handleLoadMore}
-            >
-              More
-            </button>
-          </div>
-        )}
+      {offset && (
+        <div className="flex justify-center mt-4">
+          <button 
+            className="px-4 py-2 bg-blue-400 text-white rounded-full hover:bg-blue-500"
+            onClick={handleLoadMore}
+          >
+            More
+          </button>
+        </div>
+      )}
 
-        <Footer/>
-        
-</>
-
-      
+      <Footer/>        
+    </>      
   );
 }
 

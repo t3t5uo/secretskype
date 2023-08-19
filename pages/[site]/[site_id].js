@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import Layout from '../../components/Layout';
 import axios from 'axios';
 import Head from 'next/head'; 
-// import { useRouter } from 'next/router';
-
 
 export default function ModelPage({ model, site }) {
   const [lightboxImage, setLightboxImage] = useState(null);
@@ -22,10 +20,7 @@ export default function ModelPage({ model, site }) {
   }
 
   const tagsArray = model.fields.tags ? model.fields.tags.split(', ') : [];
-  const skypeButtonText = model.fields.price ? `$${model.fields.price}/min | Skype Profile` : 'Skype Profile';
   const descriptionPrice = model.fields.price ? ` Only $${model.fields.price}/min` : '';
-
-  const currentSiteName = site.replace('dot','.') ;
 
   const otherSites = [
     { idField: 'livejasmin_id', name: 'LiveJasmin', color: 'bg-red-500' },
@@ -42,13 +37,19 @@ export default function ModelPage({ model, site }) {
 
   const visibleSites = otherSites.filter(site => model.fields[site.idField]);
 
+    const getCurrentSiteName = (siteParam) => {
+      const siteObject = otherSites.find(s => s.idField.startsWith(siteParam));
+      return siteObject ? siteObject.name : siteParam.replace('dot','.');
+    }  
+    const currentSiteName = getCurrentSiteName(site);
+
   return (
     <Layout>
       <Head>
         <title>SecretSkype - {model.fields.name} - {currentSiteName}</title>
         <meta 
-          name="{model.fields.name} on {currentSiteName} has a Secret Skype account with cheaper rates.{descriptionPrice}" 
-          content="${model.fields.slug} has a secret skype."
+          name="description" 
+          content="{model.fields.name} on {currentSiteName} has a Secret Skype account with the best rates.{descriptionPrice}"
         />
       </Head>
       <div className="bg-white min-h-screen">
@@ -62,15 +63,25 @@ export default function ModelPage({ model, site }) {
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2">{model.fields.name}</h1>
             <p className="text-xl md:text-lg text-white mb-5">{model.fields.country_emoji} {model.fields.country} | {model.fields.age}</p>
 
-            {/* Skype Button */}
-            <a href={model.fields.skyprivate_url} className="mb-6 inline-block mx-2 px-8 py-3 text-lg text-white bg-blue-600 rounded-full">{skypeButtonText}</a>
+            {/* New Price Section */}
+            {model.fields.price && (
+              <div className="mb-3 flex text-white items-center justify-center text-center">
+                <span className="text-4xl font-bold">{`$${model.fields.price}`}</span>
+                <span className="text-lg ml-2">per minute</span>
+              </div>
+            )}
+
+            {/* Updated Skype Button */}
+            <a href={model.fields.skyprivate_url} target="_blank" className="mb-6 inline-block mx-2 px-8 py-3 text-lg text-white bg-blue-600 rounded-full">
+              Skype Profile
+            </a>
 
             {/* Other Cams Section */}
             {visibleSites.length > 0 && (
               <div className="mb-6">
                 <h3 className="text-lg md:text-xl text-white mb-4">Live Cams</h3>
                 {visibleSites.map((site, index) => (
-                  <a key={index} href={model.fields[site.idField.replace('_id', '_link')]} className={`${site.color} inline-block mx-2 px-5 py-2 text-white rounded-full`}>{site.name}</a>
+                  <a key={index} href={model.fields[site.idField.replace('_id', '_link')]} target="_blank" className={`${site.color} inline-block mx-2 px-5 py-2 text-white rounded-full`}>{site.name}</a>
                 ))}
               </div>
             )}
@@ -79,6 +90,12 @@ export default function ModelPage({ model, site }) {
 
         {/* White Background Section */}
         <div className="bg-white mt-5 p-10 max-w-3xl mx-auto rounded-lg">
+        
+          {/* New Intro Sentence */}
+          <p className="text-l text-center mb-11">
+            {model.fields.name} on {currentSiteName} has a Secret Skype account with the best rates.
+          </p>
+          
           {/* Tags */}
           <div className="flex flex-wrap justify-center mt-3">
             {tagsArray.map((tag, index) => (

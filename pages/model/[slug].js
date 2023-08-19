@@ -1,6 +1,5 @@
 import Layout from '../../components/Layout';
 import { useState } from 'react';
-// import { useRouter } from 'next/router';
 import Head from 'next/head';
 
 export default function ModelPage({ model }) {
@@ -19,7 +18,6 @@ export default function ModelPage({ model }) {
   }
 
   const tagsArray = model.fields.tags ? model.fields.tags.split(', ') : [];
-  const skypeButtonText = model.fields.price ? `$${model.fields.price}/min | Skype Profile` : 'Skype Profile';
 
   const otherSites = [
     { idField: 'livejasmin_id', name: 'LiveJasmin', color: 'bg-red-500' },
@@ -56,15 +54,25 @@ export default function ModelPage({ model }) {
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2">{model.fields.name}</h1>
             <p className="text-xl md:text-lg text-white mb-5">{model.fields.country_emoji} {model.fields.country} | {model.fields.age}</p>
 
-            {/* Skype Button */}
-            <a href={model.fields.skyprivate_url} className="mb-6 inline-block mx-2 px-8 py-3 text-lg text-white bg-blue-600 rounded-full">{skypeButtonText}</a>
+            {/* New Price Section */}
+            {model.fields.price && (
+              <div className="mb-3 flex text-white items-center justify-center text-center">
+                <span className="text-4xl font-bold">{`$${model.fields.price}`}</span>
+                <span className="text-lg ml-2">per minute</span>
+              </div>
+            )}
+
+            {/* Updated Skype Button */}
+            <a href={model.fields.skyprivate_url} target="_blank" className="mb-6 inline-block mx-2 px-8 py-3 text-lg text-white bg-blue-600 rounded-full">
+              Skype Profile
+            </a>
 
             {/* Other Cams Section */}
             {visibleSites.length > 0 && (
               <div className="mb-6">
                 <h3 className="text-lg md:text-xl text-white mb-4">Live Cams</h3>
                 {visibleSites.map((site, index) => (
-                  <a key={index} href={model.fields[site.idField.replace('_id', '_link')]} className={`${site.color} inline-block mx-2 px-5 py-2 text-white rounded-full`}>{site.name}</a>
+                  <a key={index} href={model.fields[site.idField.replace('_id', '_link')]} target="_blank" className={`${site.color} inline-block mx-2 px-5 py-2 text-white rounded-full`}>{site.name}</a>
                 ))}
               </div>
             )}
@@ -73,6 +81,10 @@ export default function ModelPage({ model }) {
 
         {/* White Background Section */}
         <div className="bg-white mt-5 p-10 max-w-3xl mx-auto rounded-lg">
+          {/* New Intro Sentence */}
+          <p className="text-l text-center mb-11">
+          {model.fields.name} has a secret Skype account with the best prices.
+          </p>
           {/* Tags */}
           <div className="flex flex-wrap justify-center mt-3">
             {tagsArray.map((tag, index) => (
