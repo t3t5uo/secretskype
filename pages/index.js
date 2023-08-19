@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Footer from '../components/Footer';
 // import { useRouter } from 'next/router';
-// import Head from 'next/head';
+import Head from 'next/head';
 
 
 export default function HomePage({ initialModels = [], initialOffset }) {
@@ -73,16 +73,14 @@ export default function HomePage({ initialModels = [], initialOffset }) {
     // <Layout>
       <div className="">
 
-      {/* <Head>
+      <Head>
         <title>SecretSkype</title>
         <meta 
           name="description" 
           content="Cam girls you can all on Skype at the best prices."
         />
-        <link rel="canonical" href={`https://secretskype.com/`} />
-        <meta charSet="UTF-8" />
         <html lang="en" />
-      </Head> */}
+      </Head>
         
       <div className="bg-white text-blue-600 p-4 flex justify-between items-center border-b border-gray-200">
         <span className="w-1/4"></span>
@@ -215,7 +213,7 @@ export default function HomePage({ initialModels = [], initialOffset }) {
 
 
       {/* Models Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 auto-cols-min">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 m-1 auto-cols-min">
         {models.length === 0 ? (
           <p className="col-span-full text-center py-10 text-gray-500">
             Sorry, no results for your search.
@@ -241,15 +239,6 @@ export default function HomePage({ initialModels = [], initialOffset }) {
           ))
         )}
       </div>
-
-
-
-
-
-
-
-
-
 
         {offset && (
           <div className="flex justify-center mt-4">
