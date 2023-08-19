@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import Footer from '../components/Footer';
-
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 
 export default function HomePage({ initialModels = [], initialOffset }) {
@@ -71,6 +72,18 @@ export default function HomePage({ initialModels = [], initialOffset }) {
   return (
     // <Layout>
       <div className="">
+
+      <Head>
+        <title>SecretSkype - Find the Best Models</title>
+        <meta 
+          name="description" 
+          content="Discover and connect with models from all around the world. Find models by age, price, gender, and location."
+        />
+        <link rel="canonical" href={`https://secretskype.com/`} />
+        <meta charSet="UTF-8" />
+        <html lang="en" />
+      </Head>
+        
       <div className="bg-white text-blue-600 p-4 flex justify-between items-center border-b border-gray-200">
         <span className="w-1/4"></span>
 
@@ -201,33 +214,39 @@ export default function HomePage({ initialModels = [], initialOffset }) {
 
 
 
-        {/* Models Grid */}
-        <div className="models-container grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1">
-          {models.length === 0 ? (
-            <p className="col-span-full text-center py-10 text-gray-500">
-              Sorry, no results for your search.
-            </p>
-          ) : (
-            models.map(model => (
-              <Link key={model.id} href={`/model/${model.fields.slug}`}>
-                <div className="relative cursor-pointer border rounded overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                  {/* Image */}
-                  <img src={model.fields.thumb_image[0].url} alt={model.fields.name} className="w-full h-48 object-cover" />
+      {/* Models Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 auto-cols-min">
+        {models.length === 0 ? (
+          <p className="col-span-full text-center py-10 text-gray-500">
+            Sorry, no results for your search.
+          </p>
+        ) : (
+          models.map(model => (
+            <Link key={model.id} href={`/model/${model.fields.slug}`}>
+              <div className="relative cursor-pointer border overflow-hidden hover:shadow-xl transition-shadow duration-300 aspect-w-16 aspect-h-9">
+                {/* Image */}
+                <img src={model.fields.thumb_image[0].url} alt={model.fields.name} className="w-full h-auto object-cover aspect-content" />
 
-                  {/* Overlayed Details */}
-                  <div className="absolute bottom-0 left-0 w-full p-2 bg-black bg-opacity-50 text-white flex justify-between items-center">
-                    <h2 className="text-sm truncate">{model.fields.name}</h2>
-                    {model.fields.price ? (
-                      <span className="text-xs px-2 py-1 rounded-full bg-blue-500 bg-opacity-80">
-                        ${parseFloat(model.fields.price).toFixed(2)}
-                      </span>
-                    ) : null}
-                  </div>
+                {/* Overlayed Details */}
+                <div className="absolute bottom-0 left-0 w-full p-2 flex justify-between items-center bg-gradient-to-t from-black/40 to-transparent">
+                  <h2 className="text-sm truncate text-white">{model.fields.name}</h2>
+                  {model.fields.price ? (
+                    <span className="text-xs text-white">
+                      ${parseFloat(model.fields.price).toFixed(2)}
+                    </span>
+                  ) : null}
                 </div>
-              </Link>
-            ))
-          )}
-        </div>
+              </div>
+            </Link>
+          ))
+        )}
+      </div>
+
+
+
+
+
+
 
 
 

@@ -1,5 +1,7 @@
 import Layout from '../../components/Layout';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 export default function ModelPage({ model }) {
   const [lightboxImage, setLightboxImage] = useState(null);
@@ -36,6 +38,16 @@ export default function ModelPage({ model }) {
 
   return (
     <Layout>
+     <Head>
+        <title>SecretSkype - {model.fields.name}</title>
+        <meta 
+          name="description" 
+          content="${model.fields.slug} has a secret skype."
+        />
+        <link rel="canonical" href={`https://secretskype.com/model/${model.fields.slug}`} />
+        <meta charSet="UTF-8" />
+        <html lang="en" />
+      </Head>
       <div className="bg-white min-h-screen">
         {/* Hero Section */}
         <div className="relative h-[90vh] bg-cover bg-center" style={{ backgroundImage: `url(${model.fields.background_image[0].url})` }}>
@@ -72,7 +84,7 @@ export default function ModelPage({ model }) {
           </div>
 
           {/* Bio */}
-          <p className="text-gray-600 mt-10">{model.fields.bio}</p>
+          <p className="text-gray-600 mt-10 break-words overflow-hidden">{model.fields.bio}</p>
         </div>
       </div>
     </Layout>
