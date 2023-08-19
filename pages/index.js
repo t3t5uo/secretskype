@@ -74,10 +74,10 @@ export default function HomePage({ initialModels = [], initialOffset }) {
       <div className="">
 
       <Head>
-        <title>SecretSkype - Find the Best Models</title>
+        <title>SecretSkype</title>
         <meta 
           name="description" 
-          content="Discover and connect with models from all around the world. Find models by age, price, gender, and location."
+          content="Cam girls you can all on Skype at the best prices."
         />
         <link rel="canonical" href={`https://secretskype.com/`} />
         <meta charSet="UTF-8" />
