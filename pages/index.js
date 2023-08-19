@@ -79,11 +79,6 @@ export default function HomePage({ initialModels = [], initialOffset }) {
           name="description" 
           content="Cam girls you can all on Skype at the best prices."
         />
-        {/* <meta 
-          name="description" 
-          content="Cam girls you can all on Skype at the best prices."
-        />
-        <html lang="en" /> */}
       </Head>
         
       <div className="bg-white text-blue-600 p-4 flex justify-between items-center border-b border-gray-200">

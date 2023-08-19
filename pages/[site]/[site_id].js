@@ -50,7 +50,6 @@ export default function ModelPage({ model, site }) {
           name="{model.fields.name} on {currentSiteName} has a Secret Skype account with cheaper rates.{descriptionPrice}" 
           content="${model.fields.slug} has a secret skype."
         />
-        {/* <link rel="canonical" href={`https://yourdomain.com/${site}/${model.fields[site + '_id']}`} /> */}
       </Head>
       <div className="bg-white min-h-screen">
         {/* Hero Section */}

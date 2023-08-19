@@ -43,10 +43,7 @@ export default function ModelPage({ model }) {
         <meta 
           name="description" 
           content="${model.fields.slug} has a secret skype."
-        />
-        {/* <link rel="canonical" href={`https://secretskype.com/model/${model.fields.slug}`} />
-        <meta charSet="UTF-8" /> */}
-        <html lang="en" />
+        />     
       </Head>
       <div className="bg-white min-h-screen">
         {/* Hero Section */}
