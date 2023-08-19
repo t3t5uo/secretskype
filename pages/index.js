@@ -71,7 +71,7 @@ export default function HomePage({ initialModels = [], initialOffset }) {
 
   return (
     // <Layout>
-      <div className="">
+      <>
 
       <Head>
         <title>SecretSkype</title>
@@ -253,8 +253,7 @@ export default function HomePage({ initialModels = [], initialOffset }) {
 
         <Footer/>
         
-      </div>
-
+</>
 
       
   );
