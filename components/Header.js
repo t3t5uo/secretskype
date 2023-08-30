@@ -18,7 +18,8 @@ export default function Header() {
 
   return (
     <div className="">
-      <div className="bg-white text-blue-600 p-4 flex justify-between items-center border-b border-gray-200">
+      {/* <div className="bg-white text-blue-600 p-4 flex justify-between items-center border-b border-gray-200"> */}
+      <div className="bg-white text-blue-600 p-4 flex justify-between items-center ">
         <span className="w-1/4"></span>
 
         <Link href="/">

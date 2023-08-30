@@ -79,7 +79,8 @@ export default function HomePage({ initialModels = [], initialOffset }) {
         />
       </Head>
         
-      <div className="bg-white text-blue-600 p-4 flex justify-between items-center border-b border-gray-200">
+      {/* <div className="bg-white text-blue-600 p-4 flex justify-between items-center border-b border-gray-200"> */}
+      <div className="bg-white text-blue-600 p-4 flex justify-between items-center ">
         <span className="w-1/4"></span>
 
         <Link href="/">
@@ -218,7 +219,7 @@ export default function HomePage({ initialModels = [], initialOffset }) {
         ) : (
           models.map(model => (
             <Link key={model.id} href={`/model/${model.fields.slug}`}>
-              <div className="relative cursor-pointer border overflow-hidden hover:shadow-xl transition-shadow duration-300 aspect-w-16 aspect-h-9">
+              <div className="relative cursor-pointer overflow-hidden hover:shadow-xl transition-shadow duration-300 aspect-w-16 aspect-h-9">
                 {/* Image */}
                 <img src={model.fields.thumb_image[0].url} alt={model.fields.name} className="w-full h-auto object-cover aspect-content" />
 
@@ -227,7 +228,7 @@ export default function HomePage({ initialModels = [], initialOffset }) {
                   <h2 className="text-sm truncate text-white">{model.fields.name}</h2>
                   {model.fields.price ? (
                     <span className="text-xs text-white">
-                      ${parseFloat(model.fields.price).toFixed(2)}
+                      ${parseFloat(model.fields.price)}
                     </span>
                   ) : null}
                 </div>

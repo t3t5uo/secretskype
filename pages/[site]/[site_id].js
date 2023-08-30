@@ -103,8 +103,17 @@ export default function ModelPage({ model, site }) {
             ))}
           </div>
 
+          {/* Conditionally Render Twitter Button */}
+          {model.fields.twitter_url && (
+            <div className="flex justify-center my-5">
+              <a href={model.fields.twitter_url} target="_blank" rel="noopener noreferrer" className="inline-block mx-2 mb-0 mt-3 px-6 py-3 text-lg text-white bg-blue-600 rounded-full">
+                Twitter
+              </a>
+            </div>
+          )}
+
           {/* Bio */}
-          <p className="text-gray-600 mt-10 break-words overflow-hidden">{model.fields.bio}</p>
+          <p className="text-gray-600 mt-10 break-words overflow-hidden">{model.fields.bio.trim().replace(/\s+/g, ' ')}</p>
         </div>
       </div>
     </Layout>
